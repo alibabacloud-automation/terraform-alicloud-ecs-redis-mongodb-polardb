@@ -1,25 +1,32 @@
+#alicloud_instance
 variable "name" {
   description = "The specification of module name."
   type        = string
-  default     = "tf-ecs-redis-mongodb-polardb"
+  default     = ""
 }
 
-variable "description" {
-  description = "The specification of module description."
+variable "availability_zone" {
+  description = "The available zone to launch modules."
   type        = string
-  default     = "tf-ecs-redis-mongodb-polardb-description"
+  default     = ""
 }
 
-variable "available_resource_creation" {
-  description = "The specification of available resource creation."
+variable "security_group_ids" {
+  description = "A list of security group ids to associate with."
+  type        = list(string)
+  default     = []
+}
+
+variable "vswitch_id" {
+  description = "VSwitch variables, if vswitch_id is empty, then the net_type = classic."
   type        = string
-  default     = "PolarDB"
+  default     = ""
 }
 
 variable "instance_type" {
   description = "The specification of the instance type."
   type        = string
-  default     = "ecs.n4.large"
+  default     = ""
 }
 
 variable "system_disk_category" {
@@ -31,25 +38,31 @@ variable "system_disk_category" {
 variable "system_disk_name" {
   description = "The specification of the system disk name."
   type        = string
-  default     = "system_disk"
+  default     = ""
 }
 
 variable "system_disk_description" {
   description = "The specification of the system disk description."
   type        = string
-  default     = "system_disk_description"
+  default     = ""
 }
 
 variable "image_id" {
   description = "The specification of the image id."
   type        = string
-  default     = "ubuntu_18_04_64_20G_alibase_20190624.vhd"
+  default     = ""
 }
 
 variable "internet_max_bandwidth_out" {
   description = "The specification of the internet max bandwidth out."
   type        = number
   default     = 10
+}
+
+variable "data_disks_name" {
+  description = "The name of the data disk."
+  type        = string
+  default     = ""
 }
 
 variable "ecs_size" {
@@ -64,6 +77,19 @@ variable "category" {
   default     = "cloud_efficiency"
 }
 
+variable "description" {
+  description = "The specification of module description."
+  type        = string
+  default     = ""
+}
+
+variable "encrypted" {
+  description = "Encrypted the data in this disk."
+  type        = bool
+  default     = false
+}
+
+#alicloud_kvstore_instance
 variable "security_ips" {
   description = "The specification of the security ips."
   type        = list(string)
@@ -97,15 +123,16 @@ variable "redis_lazyfree_lazy_eviction" {
 variable "redis_resource_group_id" {
   description = "The specification of the redis resource group id."
   type        = string
-  default     = "rg-123456"
+  default     = ""
 }
 
 variable "redis_instance_class" {
   description = "The specification of the redis resource instance class."
   type        = string
-  default     = "redis.master.large.default"
+  default     = ""
 }
 
+#alicloud_mongodb_instance
 variable "mongodb_engine_version" {
   description = "The specification of the mongodb engine version."
   type        = string
@@ -115,13 +142,20 @@ variable "mongodb_engine_version" {
 variable "db_instance_class" {
   description = "The specification of the db instance class."
   type        = string
-  default     = "dds.mongo.mid"
+  default     = ""
 }
 
 variable "db_instance_storage" {
   description = "The specification of the db instance storage."
   type        = number
   default     = 10
+}
+
+#alicloud_polardb_cluster
+variable "db_type" {
+  description = "Database type.Value options: MySQL, Oracle, PostgreSQL."
+  type        = string
+  default     = "MySQL"
 }
 
 variable "db_version" {
@@ -139,23 +173,24 @@ variable "pay_type" {
 variable "db_node_class" {
   description = "The specification of the db node class."
   type        = string
-  default     = "polar.mysql.x4.large"
+  default     = ""
 }
 
-variable "availability_zone" {
-  description = "The available zone to launch modules."
+variable "polardb_cluster_description" {
+  description = "The description of cluster."
   type        = string
   default     = ""
 }
 
-variable "vswitch_id" {
-  description = "VSwitch variables, if vswitch_id is empty, then the net_type = classic."
+#alicloud_polardb_database
+variable "db_name" {
+  description = "Name of the database requiring a uniqueness check."
   type        = string
   default     = ""
 }
 
-variable "security_group_ids" {
-  description = "A list of security group ids to associate with."
-  type        = list(string)
-  default     = []
+variable "available_resource_creation" {
+  description = "The specification of available resource creation."
+  type        = string
+  default     = "PolarDB"
 }

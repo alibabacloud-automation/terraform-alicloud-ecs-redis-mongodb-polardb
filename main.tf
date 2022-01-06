@@ -10,46 +10,46 @@ resource "alicloud_instance" "default" {
   image_id                   = var.image_id
   internet_max_bandwidth_out = var.internet_max_bandwidth_out
   data_disks {
-    name        = var.name
+    name        = var.data_disks_name
     size        = var.ecs_size
     category    = var.category
     description = var.description
-    encrypted   = true
+    encrypted   = var.encrypted
   }
 }
 
 resource "alicloud_kvstore_instance" "default" {
-  vswitch_id        = var.vswitch_id
-  zone_id           = var.availability_zone
-  db_instance_name  = var.name
-  security_ips      = var.security_ips
-  instance_type     = var.redis_instance_type
-  engine_version    = var.redis_engine_version
-  config            = {
-    appendonly = var.redis_appendonly,lazyfree-lazy-eviction = var.redis_lazyfree_lazy_eviction,
+  vswitch_id       = var.vswitch_id
+  zone_id          = var.availability_zone
+  db_instance_name = var.name
+  security_ips     = var.security_ips
+  instance_type    = var.redis_instance_type
+  engine_version   = var.redis_engine_version
+  config = {
+    appendonly = var.redis_appendonly, lazyfree-lazy-eviction = var.redis_lazyfree_lazy_eviction,
   }
   resource_group_id = var.redis_resource_group_id
   instance_class    = var.redis_instance_class
 }
 
 resource "alicloud_mongodb_instance" "default" {
+  vswitch_id          = var.vswitch_id
   security_ip_list    = var.security_ips
   engine_version      = var.mongodb_engine_version
   db_instance_class   = var.db_instance_class
   db_instance_storage = var.db_instance_storage
-  vswitch_id          = var.vswitch_id
 }
 
 resource "alicloud_polardb_cluster" "default" {
-  db_type       = "MySQL"
+  vswitch_id    = var.vswitch_id
+  db_type       = var.db_type
   db_version    = var.db_version
   pay_type      = var.pay_type
   db_node_class = var.db_node_class
-  vswitch_id    = var.vswitch_id
-  description   = var.description
+  description   = var.polardb_cluster_description
 }
 
 resource "alicloud_polardb_database" "default" {
   db_cluster_id = alicloud_polardb_cluster.default.id
-  db_name       = var.name
+  db_name       = var.db_name
 }

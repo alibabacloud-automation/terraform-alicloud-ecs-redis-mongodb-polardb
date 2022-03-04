@@ -161,7 +161,7 @@ variable "db_type" {
 variable "db_version" {
   description = "The specification of the db version."
   type        = string
-  default     = "8.0"
+  default     = "5.6"
 }
 
 variable "pay_type" {

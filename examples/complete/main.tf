@@ -21,7 +21,7 @@ data "alicloud_kvstore_instance_classes" "default" {
 data "alicloud_polardb_node_classes" "default" {
   pay_type   = var.pay_type
   db_type    = "MySQL"
-  db_version = "8.0"
+  db_version = "5.6"
   zone_id    = data.alicloud_polardb_zones.default.zones.0.id
 }
 
@@ -76,11 +76,12 @@ module "example" {
 
   #alicloud_polardb_cluster
   db_type                     = "MySQL"
-  db_version                  = "8.0"
+  db_version                  = "5.6"
   pay_type                    = var.pay_type
   db_node_class               = data.alicloud_polardb_node_classes.default.classes.0.supported_engines.0.available_resources.0.db_node_class
   polardb_cluster_description = var.polardb_cluster_description
 
   #alicloud_polardb_database
   db_name = "tf-db-name"
+
 }

@@ -70,7 +70,7 @@ module "example" {
   redis_instance_class         = data.alicloud_kvstore_instance_classes.default.instance_classes.0
 
   #alicloud_mongodb_instance
-  mongodb_engine_version = "3.4"
+  mongodb_engine_version = "4.2"
   db_instance_class      = var.db_instance_class
   db_instance_storage    = var.db_instance_storage
 

@@ -189,8 +189,3 @@ variable "db_name" {
   default     = ""
 }
 
-variable "available_resource_creation" {
-  description = "The specification of available resource creation."
-  type        = string
-  default     = "PolarDB"
-}
